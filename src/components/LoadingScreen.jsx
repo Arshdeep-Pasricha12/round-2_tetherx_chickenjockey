@@ -6,16 +6,19 @@ export default function LoadingScreen() {
   const barRef = useRef(null)
 
   useEffect(() => {
-    const tl = gsap.timeline()
-    tl.fromTo(logoRef.current, 
-      { opacity: 0, scale: 0.8, y: 20 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.7)' }
-    )
-    tl.fromTo(barRef.current,
-      { opacity: 0, scaleX: 0 },
-      { opacity: 1, scaleX: 1, duration: 0.5, ease: 'power2.out' },
-      '-=0.3'
-    )
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline()
+      tl.fromTo(logoRef.current, 
+        { opacity: 0, scale: 0.8, y: 20 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.7)' }
+      )
+      tl.fromTo(barRef.current,
+        { opacity: 0, scaleX: 0 },
+        { opacity: 1, scaleX: 1, duration: 0.5, ease: 'power2.out' },
+        '-=0.3'
+      )
+    })
+    return () => ctx.revert()
   }, [])
 
   return (

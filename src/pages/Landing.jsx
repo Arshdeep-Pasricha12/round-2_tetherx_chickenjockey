@@ -112,6 +112,7 @@ function CTAOverlay({ progress }) {
         <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <Link to="/vault" className="btn btn-primary btn-lg"><Shield size={18} /> Vehicle Vault</Link>
           <Link to="/ownership" className="btn btn-secondary btn-lg"><Link2 size={18} /> Ownership Chain</Link>
+          <Link to="/insurance" className="btn btn-primary btn-lg" style={{ background: 'var(--accent-tertiary)', color: 'var(--bg-primary)' }}><Shield size={18} /> Insurance Shield</Link>
           <Link to="/sos" className="btn btn-danger btn-lg"><Radio size={18} /> SOS</Link>
           <Link to="/stolen" className="btn btn-secondary btn-lg"><AlertTriangle size={18} /> Alerts</Link>
         </div>
