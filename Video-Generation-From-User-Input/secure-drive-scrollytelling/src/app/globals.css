@@ -1,0 +1,325 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+:root {
+  --bg: #050505;
+  --fg: #ffffff;
+  --accent-blue: #00e5ff;
+  --accent-green: #00ff88;
+  --accent-blue-dim: rgba(0, 229, 255, 0.15);
+  --accent-green-dim: rgba(0, 255, 136, 0.15);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  letter-spacing: -0.04em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Loading Screen ──────────────────────────────────── */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  gap: 32px;
+}
+
+.loading-text {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  font-family: "Courier New", monospace;
+}
+
+.loading-bar-track {
+  width: 280px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background: var(--accent-blue);
+  border-radius: 1px;
+  transition: width 0.1s linear;
+  box-shadow:
+    0 0 12px var(--accent-blue),
+    0 0 30px rgba(0, 229, 255, 0.3);
+}
+
+.loading-percent {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.1em;
+  font-family: "Courier New", monospace;
+}
+
+/* ─── Scroll Container ────────────────────────────────── */
+
+.scroll-container {
+  position: relative;
+  width: 100%;
+  height: 500vh;
+}
+
+.sticky-wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.canvas-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.canvas-layer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Beat Overlays ───────────────────────────────────── */
+
+.beat-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 64px;
+  pointer-events: none;
+}
+
+.beat-overlay.center-layout {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px;
+}
+
+.beat-title {
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  margin-bottom: 16px;
+}
+
+.beat-subtitle {
+  font-size: clamp(14px, 1.6vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 480px;
+  letter-spacing: -0.01em;
+}
+
+.beat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border: 1px solid;
+}
+
+.beat-badge.green {
+  color: var(--accent-green);
+  background: var(--accent-green-dim);
+  border-color: rgba(0, 255, 136, 0.25);
+}
+
+.beat-badge.blue {
+  color: var(--accent-blue);
+  background: var(--accent-blue-dim);
+  border-color: rgba(0, 229, 255, 0.25);
+}
+
+/* ─── Concentric Rings (Beat B) ───────────────────────── */
+
+.rings-container {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 280px;
+  height: 280px;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.ring.green {
+  border-color: rgba(0, 255, 136, 0.4);
+}
+
+/* ─── Dashboard Overlay (Beat C) ──────────────────────── */
+
+.dashboard-overlay {
+  position: absolute;
+  top: 60px;
+  right: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.dash-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dash-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dash-dot.blue {
+  background: var(--accent-blue);
+  box-shadow: 0 0 8px var(--accent-blue);
+}
+
+.dash-dot.green {
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+}
+
+/* ─── Data Stream Lines (Beat D) ──────────────────────── */
+
+.data-stream {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.stream-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-blue),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+/* ─── Gradient Overlays for Depth ─────────────────────── */
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 50%, var(--bg) 100%),
+    linear-gradient(to top, var(--bg) 0%, transparent 15%),
+    linear-gradient(to bottom, var(--bg) 0%, transparent 8%);
+}
+
+/* ─── Scanline Effect ─────────────────────────────────── */
+
+.scanline {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* ─── Bottom Progress Indicator ───────────────────────── */
+
+.scroll-progress-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent-blue);
+  z-index: 100;
+  box-shadow: 0 0 10px var(--accent-blue);
+}
+
+@media (max-width: 768px) {
+  .beat-overlay {
+    padding: 40px 24px;
+  }
+
+  .rings-container {
+    width: 160px;
+    height: 160px;
+    right: 5%;
+    top: 20%;
+  }
+
+  .dashboard-overlay {
+    top: 24px;
+    right: 24px;
+  }
+}
