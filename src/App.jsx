@@ -44,28 +44,17 @@ function Navbar() {
 }
 
 function App() {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000)
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (loading) return <LoadingScreen />
-
   return (
     <Router>
-      <div className="app-layout">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/vault" element={<VehicleVault />} />
-          <Route path="/ownership" element={<OwnershipChain />} />
-          <Route path="/insurance" element={<InsuranceShield />} />
-          <Route path="/sos" element={<EmergencySOS />} />
-          <Route path="/stolen" element={<StolenAlert />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/vault" element={<div className="app-layout"><VehicleVault /></div>} />
+        <Route path="/ownership" element={<div className="app-layout"><OwnershipChain /></div>} />
+        <Route path="/insurance" element={<div className="app-layout"><InsuranceShield /></div>} />
+        <Route path="/sos" element={<div className="app-layout"><EmergencySOS /></div>} />
+        <Route path="/stolen" element={<div className="app-layout"><StolenAlert /></div>} />
+      </Routes>
     </Router>
   )
 }
